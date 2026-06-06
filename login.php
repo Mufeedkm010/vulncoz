@@ -1,65 +1,99 @@
 <?php
-
 session_start();
 include 'config/db.php';
 
-$message = "";
+$error = "";
 
 if(isset($_POST['login']))
 {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users
-              WHERE username='$username'
+    // Intentionally vulnerable for training purposes
+    $query = "SELECT * FROM users 
+              WHERE username='$username' 
               AND password='$password'";
 
-    $result = mysqli_query($conn,$query);
+    $result = mysqli_query($conn, $query);
 
-    if(mysqli_num_rows($result)==1)
+    if(mysqli_num_rows($result) == 1)
     {
         $user = mysqli_fetch_assoc($result);
 
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
 
-        header("Location: dashboard.php");
+        header("Location: index.php");
         exit();
+
     }
     else
     {
-        $message = "Invalid Credentials";
+        $error = "Invalid username or password";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Vulncoz Login</title>
+    <title>Vulncoz Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
-<h2>Employee Login</h2>
+<div class="container mt-5">
 
-<?php echo $message; ?>
+    <div class="row justify-content-center">
 
-<form method="POST">
+        <div class="col-md-4">
 
-Username:
-<input type="text" name="username">
+            <div class="card shadow p-4">
 
-<br><br>
+                <h2 class="text-center mb-4">Vulncoz Login</h2>
 
-Password:
-<input type="password" name="password">
+                <?php if($error != "") { ?>
+                    <div class="alert alert-danger">
+                        <?php echo $error; ?>
+                    </div>
+                <?php } ?>
 
-<br><br>
+                <form method="POST">
 
-<input type="submit" name="login" value="Login">
+                    <div class="mb-3">
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Username"
+                               required>
+                    </div>
 
-</form>
+                    <div class="mb-3">
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password"
+                               required>
+                    </div>
+
+                    <button type="submit"
+                            name="login"
+                            class="btn btn-primary w-100">
+                        Login
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>

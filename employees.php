@@ -1,50 +1,74 @@
-<?php
+<?php include 'includes/header.php'; ?>
 
-session_start();
+<div class="container-fluid">
 
-if(!isset($_SESSION['username']))
-{
-    header("Location: login.php");
-    exit();
-}
+<div class="row">
 
-include 'config/db.php';
+<?php include 'includes/sidebar.php'; ?>
 
-$result = mysqli_query($conn,"SELECT * FROM employees");
+<div class="col-md-10">
 
-?>
+<div class="topbar">
 
-<h1>Employee Directory</h1>
+<h2>Employee Directory</h2>
 
-<table border="1">
+</div>
+
+<div class="container mt-4">
+
+<table class="table table-bordered">
 
 <tr>
+
 <th>ID</th>
 <th>Name</th>
 <th>Department</th>
-<th>Profile</th>
+<th>Action</th>
+
 </tr>
-
-<?php
-
-while($row=mysqli_fetch_assoc($result))
-{
-?>
 
 <tr>
-<td><?php echo $row['id']; ?></td>
-<td><?php echo $row['fullname']; ?></td>
-<td><?php echo $row['department']; ?></td>
 
+<td>1</td>
+<td>John Miller</td>
+<td>IT</td>
 <td>
-<a href="viewemployee.php?id=<?php echo $row['id']; ?>">
+<a href="viewemployee.php?id=1"
+class="btn btn-primary">
+
 View
+
 </a>
 </td>
+
 </tr>
 
-<?php
-}
-?>
+<tr>
+
+<td>2</td>
+<td>Sarah Johnson</td>
+<td>HR</td>
+<td>
+
+<a href="viewemployee.php?id=2"
+class="btn btn-primary">
+
+View
+
+</a>
+
+</td>
+
+</tr>
 
 </table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<?php include 'includes/footer.php'; ?>
