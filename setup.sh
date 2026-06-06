@@ -13,15 +13,13 @@ sudo systemctl start apache2 mariadb
 echo "[+] Creating web directory"
 sudo mkdir -p /var/www/html/vulncoz
 
-echo "[+] Copying application files"
+echo "[+] Deploying Vulncoz application..."
 
-sudo rsync -av \
+sudo rsync -a \
 --exclude='.git' \
---exclude='README.md' \
---exclude='INSTALL.md' \
---exclude='database.sql' \
---exclude='setup.sh' \
-./ /var/www/html/vulncoz/
+./ /var/www/html/vulncoz/ > /dev/null 2>&1
+
+echo "[✓] Application deployed successfully"
 
 echo "[+] Importing database"
 
