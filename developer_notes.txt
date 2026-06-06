@@ -1,0 +1,9 @@
+Developer Notes
+
+TODO:
+- Remove test credentials before production
+- Review upload validation
+- Disable debug mode
+
+Developer:
+developer

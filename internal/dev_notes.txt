@@ -1,0 +1,12 @@
+Developer Notes
+
+TODO:
+- Remove old admin testing endpoint
+- Disable verbose API responses
+- Clean backup archives
+
+Developer:
+developer
+
+Internal Reference:
+DEV-2026-7781

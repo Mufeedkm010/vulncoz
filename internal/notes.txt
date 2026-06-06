@@ -1,0 +1,5 @@
+IT Team Notes
+
+- Password rotation scheduled next month.
+- Remove old backup files.
+- Review employee access permissions.
